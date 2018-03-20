@@ -1,0 +1,23 @@
+{% load static %}
+{% if error %}
+    <h1>Некоректно задана функція.</h1>
+{% else %}
+    <table>
+        <thead>
+        <tr>
+            {% for th in columns %}
+                <th>{{ th }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in table %}
+            <tr>
+                {% for td in  tr %}
+                    <td>{{ td }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
