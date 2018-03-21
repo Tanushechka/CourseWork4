@@ -57,19 +57,20 @@ class Utils(object):
     OP_IMPL = "→"
     OP_EQ = "↔"
     OP_ATTRIBUTES = {
-        OP_NOT: {'prcd': 2, 'fn': Operator.not_},
-        OP_OR: {'prcd': 1, 'fn': Operator.or_},
-        OP_AND: {'prcd': 1, 'fn': Operator.and_},
-        OP_XOR: {'prcd': 1, 'fn': Operator.xor_},
+        OP_NOT: {'prcd': 5, 'fn': Operator.not_},
+        OP_OR: {'prcd': 3, 'fn': Operator.or_},
+        OP_AND: {'prcd': 3, 'fn': Operator.and_},
+        OP_XOR: {'prcd': 3, 'fn': Operator.xor_},
         OP_AR_P: {'prcd': 1, 'fn': Operator.ar_p_},
         OP_SHEFF: {'prcd': 1, 'fn': Operator.shf_},
         OP_IMPL: {'prcd': 1, 'fn': Operator.imp_},
         OP_EQ: {'prcd': 1, 'fn': Operator.eq_},
     }
 
-    SEP_RE = re.compile(r'\s*(%s)\s*' % re.escape('|'.join(map(
-        re.escape, list(OP_ATTRIBUTES.keys()) + [LEFT_PAREN, RIGHT_PAREN]))))
-    SEP_RE = re.compile()
+    LETTER_SET = {'a', 'b', 'c', 'i', 'j', 'k', 'x', 'y', 'z'}
+
+    SEP_RE = re.compile(r'\s*(%s)\s*' % '|'.join(map(
+        re.escape, list(OP_ATTRIBUTES.keys()) + [LEFT_PAREN, RIGHT_PAREN])))
 
     @classmethod
     def get_truth_table(cls, n):
@@ -119,3 +120,25 @@ class Utils(object):
                 postfix.append(t)
         postfix.extend(reversed(op_stack))
         return postfix
+
+    @classmethod
+    def get_used_letters(cls, expression):
+        return [x for x in sorted(set(expression) & cls.LETTER_SET)]
+
+    @classmethod
+    def calc_postfix(cls, tokens):
+        result, stack = 0, []
+        for tok in tokens:
+
+            if tok in cls.OP_ATTRIBUTES:
+                if tok == cls.OP_NOT:
+                    stack.pop()
+                    stack.append(cls.OP_ATTRIBUTES[tok]['fn'])
+                else:
+                    op1, op2, result = stack.pop(), stack.pop(), 0
+                    stack.append(cls.OP_ATTRIBUTES[tok]['fn'])
+            else:
+                stack.append(tok)
+        if len(stack) != 1:
+            raise ValueError("invalid expression, operators and operands don't match")
+        return stack.pop()

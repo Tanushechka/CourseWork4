@@ -31,17 +31,6 @@ class IndexView(View):
 class TruthTableView(View):
 
     template_name = "truth_table.html"
-    LETTER_SET = {'a', 'b', 'c', 'i', 'j', 'k', 'x', 'y', 'z'}
-    OPERATION_DICT = {
-        "∧": "Operator.and_",
-        "∨": "",
-        "↓": "",
-        "|": "",
-        "⊕": "",
-        "→": "",
-        "↔": "",
-        "!": "",
-    }
 
     def post(self, request):
         logic_func = request.POST.get("logic_func", "")
@@ -49,6 +38,9 @@ class TruthTableView(View):
         if not logic_func or not Utils.is_balanced_brackets(logic_func):
             return HttpResponse(render_to_string(self.template_name, context={"error": True}, request=request))
         print(Utils.OP_AND in logic_func)
-        print(Utils.infix2postfix(logic_func))
+        a = Utils.infix2postfix(logic_func)
+        print(a)
+        print(Utils.get_used_letters(logic_func))
+        print(Utils.calc_postfix(a))
         content = render_to_string(self.template_name, context={}, request=request)
         return HttpResponse(content)
