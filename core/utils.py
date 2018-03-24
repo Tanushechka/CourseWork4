@@ -161,3 +161,32 @@ class Utils(object):
             last_row = [*row]
             result.append(row)
         return result
+
+    @classmethod
+    def generate_polinom(cls,
+                         triangle_value,
+                         data,
+                         columns
+                         ):
+        polinom = []
+        records = [dict(zip(columns, x)) for x in data]
+
+        for idx, record in enumerate(records):
+            row = []
+            if not triangle_value[idx]:
+                continue
+            for k, v in record.items():
+                if not v:
+                    continue
+                row.append(k)
+
+            if not any(record.values()):
+                row = ['1']
+
+            if row:
+                res = f" {cls.OP_XOR} ".join(row)
+                if len(row) > 1:
+                    res = f"({res})"
+                polinom.append(res)
+
+        return f" {cls.OP_XOR} ".join(polinom)

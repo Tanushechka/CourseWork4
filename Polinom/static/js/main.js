@@ -1,7 +1,8 @@
 $(document).ready(() => {
     let func = $("#function"),
         truthTable = $('#truth-table'),
-        pascalTriangle = $("#pascal-triangle");
+        pascalTriangle = $("#pascal-triangle"),
+        polinomInfo = $("#main-info");
 
     $("#calculate").click(() => {
         let value = func.val();
@@ -20,9 +21,12 @@ $(document).ready(() => {
                 console.log(data);
                 truthTable.html(data['truthTable']);
                 pascalTriangle.html(data['pascalTriangle']);
+                polinomInfo.html(data["polinomAnswer"])
             },
             error: (data) => {
                 truthTable.html(data.responseText);
+                pascalTriangle.html("");
+                polinomInfo.html("");
             }
         });
     });
