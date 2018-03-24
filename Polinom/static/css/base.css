@@ -2,18 +2,21 @@ body {
   background-color: #fff;
   margin: 0 auto;
 }
-.calculator .calbody {
-  background: #097c9b;
-  border: 1px solid #ff0;
-  padding: 10px;
-  margin-left: 450px;
-  min-width: 27.4em;
-  max-width: 27.4em;
+.row {
+  margin: 0 auto;
+  padding: 0;
 }
-.calculator h1 {
-  text-align: center;
-  font-size: 40px;
-  color: #003652;
+.calculator .calbody {
+    background: #212529;
+    border: 1px solid #32383e;
+    padding: 10px;
+    min-width: 450px;
+    max-width: 450px;
+    width: 450px;
+}
+.calculator .calbody .row {
+  margin: 0 auto;
+  padding: 0;
 }
 .calculator #lcd {
   text-align: right;
@@ -22,24 +25,48 @@ body {
   font-size: 18px;
 }
 .calculator #function {
-  color: grey;
+  color: black;
   text-align: left;
-  width: 412px;
+  width: calc(100% - 3px);
   height: 35px;
   font-size: 18px;
 }
 .calculator button {
   background-color: #fff;
-  width: 80px;
+  width: 85px;
   height: 60px;
   font-size: 20px;
-  border: 1px solid #097c9b;
+  border: 1px solid  #32383e;
+  outline: none !important;
 }
 
 .calculator button.long {
-  width: 248px;
+  width: calc(85px * 3);
 }
 
 .calculator button:hover {
-  background-color: #509ca9;
+  background-color:  #32383e;
+}
+
+#truth-table .table-responsive table thead tr th {
+  min-width: 160px;
+}
+
+span.block {
+    display: inline-block;
+    position: relative;
+    border: 1px solid grey;
+    text-align: center;
+    font-size: .8em;
+    width: 2em;
+}
+
+div.div-block {
+    text-align: center;
+    vertical-align: middle;
+}
+
+div#pascal {
+    margin: 0 auto;
+    text-align: center;
 }

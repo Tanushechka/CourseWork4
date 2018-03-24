@@ -2,22 +2,25 @@
 {% if error %}
     <h1>Некоректно задана функція.</h1>
 {% else %}
-    <table>
-        <thead>
-        <tr>
-            {% for th in columns %}
-                <th>{{ th }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for row in table %}
+    <h2>Таблиця істиності</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
             <tr>
-                {% for td in  tr %}
-                    <td>{{ td }}</td>
+                {% for th in columns %}
+                    <th scope="col">{{ th }}</th>
                 {% endfor %}
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for tr in data %}
+                <tr>
+                    {% for td in  tr %}
+                        <td>{{ td | yesno:"1,0" }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endif %}

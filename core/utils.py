@@ -74,7 +74,7 @@ class Utils(object):
 
     @classmethod
     def get_truth_table(cls, n):
-        return list(itertools.product((0, 1), repeat=n))
+        return list(itertools.product((False, True), repeat=n))
     
     @staticmethod
     def unpack(data):
@@ -126,19 +126,38 @@ class Utils(object):
         return [x for x in sorted(set(expression) & cls.LETTER_SET)]
 
     @classmethod
-    def calc_postfix(cls, tokens):
-        result, stack = 0, []
-        for tok in tokens:
+    def calc_postfix(cls, tokens, operands=None):
+        step_result = {}
+        operands = operands or {}
+        stack = []
 
+        for tok in tokens:
             if tok in cls.OP_ATTRIBUTES:
                 if tok == cls.OP_NOT:
-                    stack.pop()
-                    stack.append(cls.OP_ATTRIBUTES[tok]['fn'])
+                    op1 = stack.pop()
+                    fn = "{}({})".format(tok, op1)
+                    res = [x for x in cls.OP_ATTRIBUTES[tok]['fn'](operands.get(op1, []))]
                 else:
-                    op1, op2, result = stack.pop(), stack.pop(), 0
-                    stack.append(cls.OP_ATTRIBUTES[tok]['fn'])
+                    op2, op1 = stack.pop(), stack.pop()
+                    fn = "({} {} {})".format(op1, tok, op2)
+                    res = [x for x in cls.OP_ATTRIBUTES[tok]['fn'](operands.get(op1, []), operands.get(op2, []))]
+                step_result[fn] = res
+                operands.update(step_result)
+                stack.append(fn)
             else:
                 stack.append(tok)
         if len(stack) != 1:
             raise ValueError("invalid expression, operators and operands don't match")
-        return stack.pop()
+        return step_result
+
+    @classmethod
+    def pascal_triangle(cls, answer):
+        result = [[*answer]]
+        last_row = [*answer]
+        for i in range(len(answer) - 1):
+            row = []
+            for p1, p2 in zip(last_row, last_row[1:]):
+                row.append(p1 ^ p2)
+            last_row = [*row]
+            result.append(row)
+        return result

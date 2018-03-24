@@ -1,0 +1,9 @@
+<div class="pascal" id="pascal">
+    {% for row in triangle %}
+        <div class="div-block">
+            {% for el in  row %}
+                <span class="block">{{ el | yesno:"1,0" }}</span>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

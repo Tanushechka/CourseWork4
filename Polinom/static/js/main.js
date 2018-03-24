@@ -1,5 +1,7 @@
 $(document).ready(() => {
-    let func = $("#function");
+    let func = $("#function"),
+        truthTable = $('#truth-table'),
+        pascalTriangle = $("#pascal-triangle");
 
     $("#calculate").click(() => {
         let value = func.val();
@@ -14,15 +16,22 @@ $(document).ready(() => {
                 'csrfmiddlewaretoken': csrf_token
             },
             dataType: 'json',
-            success: function (data) {
+            success: (data) => {
                 console.log(data);
+                truthTable.html(data['truthTable']);
+                pascalTriangle.html(data['pascalTriangle']);
+            },
+            error: (data) => {
+                truthTable.html(data.responseText);
             }
         });
     });
     $("#clear").click(() => {
         func.val("");
+        truthTable.html("");
+        pascalTriangle.html("");
     });
-    $("#calbutton button")
+    $("#calbutton").find("button")
         .not("#calculate")
         .not("#clear")
         .click(ev => {
