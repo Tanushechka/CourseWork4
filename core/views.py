@@ -16,6 +16,43 @@ class IndexView(View):
         return render(request, self.template_name, {})
 
 
+class BaseView(View):
+    template_name = "base.html"
+
+    TEMPLATES = {
+        "table": "base_truth.html"
+    }
+
+    def get(self, request):
+        return render(request, self.template_name, {})
+
+    def post(self, request):
+        count = int(request.POST.get("count", 1)) or 1
+        data = Utils.get_truth_table(count)
+        columns = list(range(1, count + 1))
+        columns += ["F(" + "".join("x<sub>{}</sub>{}".format(x, ")" if i == len(columns) - 1 else ",")
+                                   for i, x in enumerate(columns))]
+        truth_table = render_to_string(self.TEMPLATES["table"],
+                                       context={"columns": columns, "data": data}, request=request)
+        response = {'truthTable': truth_table}
+        return HttpResponse(json.dumps(response), content_type="application/json")
+
+
+class PolarizeFunctionView(View):
+
+    @classmethod
+    def post(cls, request):
+        func = json.loads(request.POST.get("function", "[]"))
+        vector = json.loads(request.POST.get("vector", "[]"))
+        count = int(request.POST.get("count", 1)) or 1
+        data = Utils.get_truth_table(count)
+        columns = ["x" + str(x) for x in range(1, count + 1)]
+        pascal_triangle = Utils.pascal_triangle(func)
+        polinom_answer = [x[0] for x in pascal_triangle]
+        polinom_answer = Utils.generate_polinom(polinom_answer, data, columns)
+        return HttpResponse(json.dumps({}), content_type="application/json")
+
+
 class TruthTableView(View):
 
     TEMPLATES = {

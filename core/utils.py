@@ -184,7 +184,7 @@ class Utils(object):
                 row = ['1']
 
             if row:
-                res = f" {cls.OP_XOR} ".join(row)
+                res = cls.OP_AND.join(row)
                 if len(row) > 1:
                     res = f"({res})"
                 polinom.append(res)

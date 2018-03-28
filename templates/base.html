@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+{% block content %}
+    {% csrf_token %}
+    <div class="index-container row">
+        <div class="col-8 offset-2">
+            <div class="row">
+                <div class="col-5 function-content">
+                    <span class="header">
+                        Булева функція
+                    </span>
+                    <span class="header white">
+                        Кількість змінних:
+                    </span>
+                    <div class="variables col-8 offset-2 row">
+                        <div class="count col-6" id="counter">
+                            3
+                        </div>
+                        <div class="count-change col-6">
+                            <button id="inc">&#9650;</button>
+                            <button id="dec">&#9660;</button>
+                        </div>
+                    </div>
+                    <div class="table-content col-12" id="baseTruthTable">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>x<sub>1</sub></th>
+                                <th>x<sub>2</sub></th>
+                                <th>x<sub>3</sub></th>
+                                <th>F(x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>)</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-7 settings-container">
+                    <fieldset>
+                        <legend>Швидкий ввід функції</legend>
+                        <div>
+                            <button id="all_zero">Всюди '0'</button>
+                            <button id="all_one">Всюди '1'</button>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Вектор поляризції</legend>
+                        <div id="vectorPolarized"></div>
+                    </fieldset>
+                    <br>
+                    <button id="calculatePolarized">Побудувати поляризований поліном Ріда-Маллера</button>
+                    <br>
+                    <p id="polarizedResult"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

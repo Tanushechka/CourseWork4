@@ -1,0 +1,26 @@
+<table>
+    <thead>
+    <tr>
+        {% for col in columns %}
+            {% if not forloop.last %}
+                <th>x<sub>{{ col }}</sub></th>
+            {% else %}
+                <th>{{ col | safe }}</th>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in data %}
+        <tr>
+            {% for item in row %}
+                <td>{{ item | yesno:"1,0" }}</td>
+            {% endfor %}
+            <td>
+                <button class="functionValue" id="f_btn-{{ forloop.counter }}"
+                onclick="this.innerText = +(!parseInt(this.innerText))">0</button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,11 +1,13 @@
 body {
-  background-color: #fff;
-  margin: 0 auto;
+    background-color: #fff;
+    margin: 0 auto;
 }
+
 .row {
-  margin: 0 auto;
-  padding: 0;
+    margin: 0 auto;
+    padding: 0;
 }
+
 .calculator .calbody {
     background: #212529;
     border: 1px solid #32383e;
@@ -14,42 +16,46 @@ body {
     max-width: 450px;
     width: 450px;
 }
+
 .calculator .calbody .row {
-  margin: 0 auto;
-  padding: 0;
+    margin: 0 auto;
+    padding: 0;
 }
+
 .calculator #lcd {
-  text-align: right;
-  width: 23em;
-  height: 40px;
-  font-size: 18px;
+    text-align: right;
+    width: 23em;
+    height: 40px;
+    font-size: 18px;
 }
+
 .calculator #function {
-  color: black;
-  text-align: left;
-  width: calc(100% - 3px);
-  height: 35px;
-  font-size: 18px;
+    color: black;
+    text-align: left;
+    width: calc(100% - 3px);
+    height: 35px;
+    font-size: 18px;
 }
+
 .calculator button {
-  background-color: #fff;
-  width: 85px;
-  height: 60px;
-  font-size: 20px;
-  border: 1px solid  #32383e;
-  outline: none !important;
+    background-color: #fff;
+    width: 85px;
+    height: 60px;
+    font-size: 20px;
+    border: 1px solid #32383e;
+    outline: none !important;
 }
 
 .calculator button.long {
-  width: calc(85px * 3);
+    width: calc(85px * 3);
 }
 
 .calculator button:hover {
-  background-color:  #32383e;
+    background-color: #32383e;
 }
 
 #truth-table .table-responsive table thead tr th {
-  min-width: 160px;
+    min-width: 160px;
 }
 
 span.block {
@@ -68,5 +74,94 @@ div.div-block {
 
 div#pascal {
     margin: 0 auto;
+    text-align: center;
+}
+
+.index-container {
+    margin: 10px 20px;
+}
+
+.index-container .function-content {
+    border: #000000 2px solid;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.index-container .function-content span.header {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 5px 10px;
+    background-color: #a0a0a0;
+    font-size: 14px;
+}
+
+.index-container .function-content span.header.white {
+    background-color: transparent !important;
+}
+
+.index-container .function-content .variables div.count-change,
+.index-container .function-content .table-content {
+    padding: 0;
+}
+
+.index-container .function-content .variables div.count-change button {
+    width: 100%;
+}
+
+.index-container .function-content .variables div.count-change button:first-child {
+    margin-bottom: 5px;
+}
+
+.index-container .function-content .variables div.count {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.index-container .function-content .table-content table {
+    margin: 10px auto;
+}
+
+.index-container .function-content .table-content table,
+.index-container .function-content .table-content table th,
+.index-container .function-content .table-content table td {
+    text-align: center;
+    border: 1px solid;
+}
+
+#baseTruthTable table td input {
+    border: none;
+    outline: none;
+    background: #a0a0a0a0;
+    width: 35px;
+    padding-left: 12px;
+}
+
+.index-container .settings-container fieldset {
+    text-align: center;
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+}
+
+.index-container .settings-container fieldset div {
+    margin: auto;
+}
+
+#calculatePolarized {
+    width: 100%;
+    padding: 20px 0;
     text-align: center;
 }
