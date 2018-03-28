@@ -18,7 +18,7 @@
             {% endfor %}
             <td>
                 <button class="functionValue" id="f_btn-{{ forloop.counter }}"
-                onclick="this.innerText = +(!parseInt(this.innerText))">0</button>
+                onclick="this.innerText = +(!parseInt(this.innerText));clearResult();">0</button>
             </td>
         </tr>
     {% endfor %}

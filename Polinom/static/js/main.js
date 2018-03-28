@@ -74,15 +74,17 @@ $(document).ready(() => {
             }
         });
         let vector = "";
-        const event = 'this.innerText = +(!parseInt(this.innerText))';
+        const event = 'this.innerText = +(!parseInt(this.innerText)); clearResult();';
         for(let i=0; i < v; i++) {
             vector += `<button onclick="${event}">0</button>`
         }
         $("#vectorPolarized").html(vector);
+        clearResult();
     }
 
     function replaceAllTableButton(val=1) {
         $.each($("table .functionValue"), (i, x) => x.innerText=val);
+        clearResult();
     }
 
     $("#all_zero").click(() => replaceAllTableButton(0));
@@ -98,15 +100,26 @@ $(document).ready(() => {
             data: {
                 'function': JSON.stringify(_function),
                 "vector": JSON.stringify(vector),
-                'count': parseInt(countVal[0].innerHTML),
                 'csrfmiddlewaretoken': csrf_token
             },
             dataType: 'json',
             success: (data) => {
-                console.log(data);
+                if(!data["polinom"])
+                    return $("h3#resultTitle").html("Для заданої функції неможливо побудувати поліном !");
+
+                $("p#polarizedResult").html(data["polinom"]);
+                $("h3#resultTitle").html("Отриманий результат : ");
             },
             error: (data) => {
             }
         });
     });
+
+    function clearResult() {
+        $("p#polarizedResult").html("");
+        $("h3#resultTitle").html("");
+    }
+
+    window.clearResult = clearResult;
+
 });

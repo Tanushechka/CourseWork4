@@ -165,3 +165,17 @@ div#pascal {
     padding: 20px 0;
     text-align: center;
 }
+
+
+span.upLine {
+    padding-top: 0;
+    border-top: solid 1px #000;
+}
+
+h3#resultTitle {
+    margin-top: 25px;
+}
+
+p#polarizedResult {
+    font-weight: 600;
+}

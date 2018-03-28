@@ -72,6 +72,8 @@ class Utils(object):
     SEP_RE = re.compile(r'\s*(%s)\s*' % '|'.join(map(
         re.escape, list(OP_ATTRIBUTES.keys()) + [LEFT_PAREN, RIGHT_PAREN])))
 
+    COLUMN_PREFIX = "x"
+
     @classmethod
     def get_truth_table(cls, n):
         return list(itertools.product((False, True), repeat=n))
@@ -190,3 +192,39 @@ class Utils(object):
                 polinom.append(res)
 
         return f" {cls.OP_XOR} ".join(polinom)
+
+    @classmethod
+    def generate_reed_polinom(cls,
+                              triangle_value,
+                              data,
+                              columns,
+                              vector
+                              ):
+        polinom = cls.generate_polinom(triangle_value, data, columns)
+
+        for idx, col in enumerate(columns):
+            new_name = cls.COLUMN_PREFIX + "<sub>{}</sub>".format(idx + 1)
+            if vector[idx]:
+                new_name = '<span class="upLine">{}</span>'.format(new_name)
+            polinom = polinom.replace(col, new_name)
+        return polinom.replace(cls.OP_AND, "")
+
+    @classmethod
+    def build_reverse_function(cls, f, v, d):
+        func = [*f]
+        vector = v[:]
+        data = d[:]
+        res = {"".join(map(lambda y: str(int(y)), x)): f for x, f in zip(data, func)}
+        res_f = []
+        keys = []
+        for key, value in res.items():
+            new_key = ""
+            for i, k in enumerate(key):
+                if vector[i]:
+                    new_key += str(int(not int(k)))
+                else:
+                    new_key += k
+            keys.append(new_key)
+            res_f.append(res[new_key])
+        return res_f
+
