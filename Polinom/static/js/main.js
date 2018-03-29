@@ -5,7 +5,7 @@ $(document).ready(() => {
         polinomInfo = $("#main-info");
 
     const MIN_VALUE = 1,
-        MAX_VALUE = 5;
+        MAX_VALUE = 10;
 
     let csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
 
@@ -80,6 +80,21 @@ $(document).ready(() => {
         }
         $("#vectorPolarized").html(vector);
         clearResult();
+
+        let main = $("#mainContainer"),
+            tableContainer = $("#truthTableContainer"),
+            settingsContainer = $("#settingsContainer");
+        if (v > 5) {
+            main.removeClass("col-8").addClass("col-10");
+            main.removeClass("offset-2").addClass("offset-1");
+            tableContainer.removeClass("col-5").addClass("col-7");
+            settingsContainer.removeClass("col-7").addClass("col-5");
+        } else {
+            main.removeClass("col-10").addClass("col-8");
+            main.removeClass("offset-1").addClass("offset-2");
+            tableContainer.removeClass("col-7").addClass("col-5");
+            settingsContainer.removeClass("col-5").addClass("col-7");
+        }
     }
 
     function replaceAllTableButton(val=1) {

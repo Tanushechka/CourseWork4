@@ -2,9 +2,9 @@
 {% block content %}
     {% csrf_token %}
     <div class="index-container row">
-        <div class="col-8 offset-2">
+        <div class="col-8 offset-2" id="mainContainer">
             <div class="row">
-                <div class="col-5 function-content">
+                <div class="col-5 function-content"  id="truthTableContainer">
                     <span class="header">
                         Булева функція
                     </span>
@@ -21,19 +21,9 @@
                         </div>
                     </div>
                     <div class="table-content col-12" id="baseTruthTable">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>x<sub>1</sub></th>
-                                <th>x<sub>2</sub></th>
-                                <th>x<sub>3</sub></th>
-                                <th>F(x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>)</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
-                <div class="col-7 settings-container">
+                <div class="col-7 settings-container" id="settingsContainer">
                     <fieldset>
                         <legend>Швидкий ввід функції</legend>
                         <div>
