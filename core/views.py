@@ -44,6 +44,7 @@ class PolarizeFunctionView(View):
     def post(cls, request):
         func = json.loads(request.POST.get("function", "[]"))
         vector = json.loads(request.POST.get("vector", "[]"))
+
         count = len(vector)
         data = Utils.get_truth_table(count)
         columns = [Utils.COLUMN_PREFIX + str(x) for x in range(1, count + 1)]
@@ -51,7 +52,8 @@ class PolarizeFunctionView(View):
         reverse_function = Utils.build_reverse_function(func, vector, data)
         pascal_triangle = Utils.pascal_triangle(reverse_function)
         polinom_answer = [x[0] for x in pascal_triangle]
-        polinom_answer = Utils.generate_reed_polinom(polinom_answer, data, columns, vector)
+        polinom_answer = Utils.generate_reed_polinom(polinom_answer, data, columns, vector) or '0'
+        polinom_answer = "P(F) = {}".format(polinom_answer)
 
         return HttpResponse(json.dumps({"polinom": polinom_answer}), content_type="application/json")
 

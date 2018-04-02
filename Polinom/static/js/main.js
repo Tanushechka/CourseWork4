@@ -47,17 +47,17 @@ $(document).ready(() => {
     func.keypress(e => {
         return e.keyCode === 8 || e.keyCode === 46 || e.keyCode === 37 || e.keyCode === 39
     });
-    let countVal = $(".index-container .variables").find("#counter"),
-        countChange = $(".index-container .count-change");
+    let countVal = $(".index-container").find("#counter");
+    countVal.on("keyup keydown change", () => {
+        let val = countVal.val();
+        if (val <= MIN_VALUE) val = MIN_VALUE;
+        if (val >= MAX_VALUE) val = MAX_VALUE;
+        countVal.val(val);
+        changeCounter(val)
+    });
+    changeCounter(1);
 
-    countChange.find("#inc").click(() => changeCounter());
-    countChange.find("#dec").click(() => changeCounter("dec"));
-    changeCounter("inc", 2);
-
-    function changeCounter(action = "inc", v = null) {
-        v = v || parseInt(countVal[0].innerHTML);
-        if ((v <= MIN_VALUE && action === "dec") || (v >= MAX_VALUE && action === "inc")) return;
-        v += (action === "inc") ? 1 : -1;
+    function changeCounter(v) {
         $.ajax({
             type: 'POST',
             url: '',
@@ -67,7 +67,6 @@ $(document).ready(() => {
             },
             dataType: 'json',
             success: (data) => {
-                countVal[0].innerHTML = v;
                 $("#baseTruthTable").html(data["truthTable"]);
             },
             error: (data) => {
@@ -80,7 +79,7 @@ $(document).ready(() => {
         }
         $("#vectorPolarized").html(vector);
         clearResult();
-
+/*
         let main = $("#mainContainer"),
             tableContainer = $("#truthTableContainer"),
             settingsContainer = $("#settingsContainer");
@@ -94,7 +93,7 @@ $(document).ready(() => {
             main.removeClass("offset-1").addClass("offset-2");
             tableContainer.removeClass("col-7").addClass("col-5");
             settingsContainer.removeClass("col-5").addClass("col-7");
-        }
+        }*/
     }
 
     function replaceAllTableButton(val=1) {
@@ -119,11 +118,7 @@ $(document).ready(() => {
             },
             dataType: 'json',
             success: (data) => {
-                if(!data["polinom"])
-                    return $("h3#resultTitle").html("Для заданої функції неможливо побудувати поліном !");
-
                 $("p#polarizedResult").html(data["polinom"]);
-                $("h3#resultTitle").html("Отриманий результат : ");
             },
             error: (data) => {
             }

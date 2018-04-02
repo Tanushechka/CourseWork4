@@ -4,13 +4,20 @@
     <div class="index-container row">
         <div class="col-8 offset-2" id="mainContainer">
             <div class="row">
-                <div class="col-5 function-content"  id="truthTableContainer">
+                <table id="tablePageResult">
+                    <tr>
+                        <td class="res-content">
+                            <div class="function-content"  id="truthTableContainer">
                     <span class="header">
                         Булева функція
                     </span>
-                    <span class="header white">
-                        Кількість змінних:
-                    </span>
+                    <div class="form-group row" id="counterContainer">
+                        <label for="counter" class="col-8 col-form-label">Кількість змінних: </label>
+                        <div class="col-4">
+                            <input type="number" class="form-control" id="counter" value="1" min="1" max="10">
+                        </div>
+                    </div>
+                    {% comment %}
                     <div class="variables col-8 offset-2 row">
                         <div class="count col-6" id="counter">
                             3
@@ -20,10 +27,13 @@
                             <button id="dec">&#9660;</button>
                         </div>
                     </div>
+                     {% endcomment %}
                     <div class="table-content col-12" id="baseTruthTable">
                     </div>
                 </div>
-                <div class="col-7 settings-container" id="settingsContainer">
+                        </td>
+                        <td class="res-content">
+                            <div class="settings-container" id="settingsContainer">
                     <fieldset>
                         <legend>Швидкий ввід функції</legend>
                         <div>
@@ -41,6 +51,9 @@
                     <h3 id="resultTitle"></h3>
                     <p id="polarizedResult"></p>
                 </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

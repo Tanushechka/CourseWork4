@@ -188,7 +188,7 @@ class Utils(object):
             if row:
                 res = cls.OP_AND.join(row)
                 if len(row) > 1:
-                    res = f"({res})"
+                    res = f"{res}"
                 polinom.append(res)
 
         return f" {cls.OP_XOR} ".join(polinom)
@@ -207,7 +207,7 @@ class Utils(object):
             if vector[idx]:
                 new_name = '<span class="upLine">{}</span>'.format(new_name)
             polinom = polinom.replace(col, new_name)
-        return polinom.replace(cls.OP_AND, "")
+        return polinom.replace(cls.OP_AND, " ")
 
     @classmethod
     def build_reverse_function(cls, f, v, d):

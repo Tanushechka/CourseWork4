@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
 body {
     background-color: #fff;
     margin: 0 auto;
+    /*font-family: 'Roboto', sans-serif;*/
+    /*font-family: 'Roboto Condensed', sans-serif;*/
+    font-family: 'Lobster', cursive;
 }
 
 .row {
@@ -166,7 +172,6 @@ div#pascal {
     text-align: center;
 }
 
-
 span.upLine {
     padding-top: 0;
     border-top: solid 1px #000;
@@ -178,4 +183,13 @@ h3#resultTitle {
 
 p#polarizedResult {
     font-weight: 600;
+}
+
+div#counterContainer {
+    margin-top: 25px;
+}
+
+table#tablePageResult tr  td.res-content {
+    vertical-align: top;
+    padding: 10px;
 }
