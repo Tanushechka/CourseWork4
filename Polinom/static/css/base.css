@@ -9,6 +9,10 @@ body {
     font-family: 'Lobster', cursive;
 }
 
+legend {
+    width: initial !important;
+}
+
 .row {
     margin: 0 auto;
     padding: 0;
@@ -144,6 +148,14 @@ div#pascal {
     background: #a0a0a0a0;
     width: 35px;
     padding-left: 12px;
+}
+
+table#tablePageResult {
+    margin: 0 auto;
+}
+
+#baseTruthTable table td, #baseTruthTable table th {
+    padding: 5px;
 }
 
 .index-container .settings-container fieldset {

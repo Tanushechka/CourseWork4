@@ -32,6 +32,7 @@ class BaseView(View):
         columns = list(range(1, count + 1))
         columns += ["F(" + "".join("x<sub>{}</sub>{}".format(x, ")" if i == len(columns) - 1 else ",")
                                    for i, x in enumerate(columns))]
+        print(columns)
         truth_table = render_to_string(self.TEMPLATES["table"],
                                        context={"columns": columns, "data": data}, request=request)
         response = {'truthTable': truth_table}
@@ -53,7 +54,7 @@ class PolarizeFunctionView(View):
         pascal_triangle = Utils.pascal_triangle(reverse_function)
         polinom_answer = [x[0] for x in pascal_triangle]
         polinom_answer = Utils.generate_reed_polinom(polinom_answer, data, columns, vector) or '0'
-        polinom_answer = "P(F) = {}".format(polinom_answer)
+        polinom_answer = "P<sub>{}</sub>(f) = {}".format(''.join(map(str, vector)), polinom_answer)
 
         return HttpResponse(json.dumps({"polinom": polinom_answer}), content_type="application/json")
 

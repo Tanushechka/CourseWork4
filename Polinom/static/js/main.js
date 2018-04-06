@@ -5,7 +5,7 @@ $(document).ready(() => {
         polinomInfo = $("#main-info");
 
     const MIN_VALUE = 1,
-        MAX_VALUE = 10;
+        MAX_VALUE = 20;
 
     let csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
 
@@ -58,6 +58,7 @@ $(document).ready(() => {
     changeCounter(1);
 
     function changeCounter(v) {
+        // countVal.attr("disabled", true);
         $.ajax({
             type: 'POST',
             url: '',
@@ -68,6 +69,7 @@ $(document).ready(() => {
             dataType: 'json',
             success: (data) => {
                 $("#baseTruthTable").html(data["truthTable"]);
+                // countVal.attr("disabled", false);
             },
             error: (data) => {
             }
